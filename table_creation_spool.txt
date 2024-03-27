@@ -1,0 +1,28 @@
+SQL> create table books(
+  2  book_id  varchar(3),
+  3  isbn numeric(13),
+  4  title varchar(25) not null,
+  5  no_of_copies numeric(3),
+  6  shelf_no numeric(3),
+  7  availability char(1) default '1' constraint bool_check check(availability in('1','0')),
+  8  price numeric(8,3),
+  9  publish_year numeric(4),
+ 10  publication varchar(30),
+ 11  edition varchar(3),
+ 12  constraint b_pk primary key(book_id));
+
+Table created.
+
+SQL> create table author(
+  2  book_id varchar(3) references books,
+  3  author varchar(25) not null);
+
+Table created.
+
+SQL>
+SQL> create table genre(
+  2  book_id varchar(3) references books,
+  3  genre varchar(15) not null check(genre in('dentistry','engineering','architecture','cooking and management','medicine','communication','commerce'))
+  4  );
+
+Table created.
